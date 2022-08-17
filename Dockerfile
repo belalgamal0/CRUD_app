@@ -25,8 +25,17 @@ COPY . /app/
 WORKDIR /app/
 RUN flutter build web
 
+# install nodejs
+RUN curl --silent --location https://deb.nodesource.com/setup_12.x | bash -
+RUN apt-get install -y \
+  nodejs
+RUN echo "Node: " && node -v
+RUN echo "NPM: " && npm -v
+
+RUN npm install -g firebase-tools
+
 # Record the exposed port
-EXPOSE 5000
+EXPOSE 8080
 
 # make server startup script executable and start the web server
 RUN ["chmod", "+x", "/app/server/server.sh"]

@@ -1,0 +1,13 @@
+version: '3.1'
+services:
+  webapp:
+    container_name: exercise1_crud-web
+    restart: always
+    image: exercise1_crud-web
+    ports:
+      - 8080:8080 
+    build:
+      context: ./
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: ["flutter", "pub", "global", "run", "webdev", "serve", "0.0.0.0:5000"]
